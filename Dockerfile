@@ -2,6 +2,8 @@ FROM node:6-alpine
 
 MAINTAINER bharath.kumar@prudential.com
 
+LABEL Description="Dockerfile for MEAN stack"
+
 # The RUN statement will allow us to execute a command for anything we want to do,
 # Create subdirectory /usr/src/app that will hold our application code within the docker image.
 RUN mkdir -p /usr/src/app
@@ -14,7 +16,9 @@ WORKDIR /usr/src/app
 # from our current directory to the working directory in our docker image.
 COPY . .
 
-RUN npm install
+# INSTALL npm and clear cache
+RUN npm install --quiet \
+  && npm cache clean
 
 # The EXPOSE instruction informs Docker that the container listens on the specified network ports at runtime.
 # We specified port 6000.
@@ -23,3 +27,5 @@ EXPOSE 6000
 # CMD statement specifies the command to start our application.This tells Docker how to run our application.
 # Here we use node server.js which is typically how files are run in Node.js.
 CMD [ "node", "server.js" ]
+
+
