@@ -1,8 +1,8 @@
 node {
-  stage 'Checkout'
-  git 'ssh://git@github.com:acbharat/sample-nodejs-app.git'
-
-  stage 'Docker build'
+  stage ('SCM')
+          { 
+  }  
+ stage 'Docker build'
   docker.build('sample-nodejs-app')
 
   stage 'Docker push'
